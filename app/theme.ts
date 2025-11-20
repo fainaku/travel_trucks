@@ -16,6 +16,10 @@ export const theme = createTheme({
       fontSize: "1.5rem",
       fontWeight: 600,
     },
+    body2: {
+      fontSize: "1rem",
+      fontWeight: 400,
+    },
   },
   shape: {
     borderRadius: 12,
@@ -41,18 +45,13 @@ export const theme = createTheme({
       main: "#F7F7F7",
       light: "#FFFFFF",
       dark: "#F2F4F7",
+      contrastText: "#DADDE1",
     },
     text: {
       primary: "#101828",
       secondary: "#475467",
       disabled: "#6C717B",
     },
-    // secondary: {
-    //   main: "#E0C2FF",
-    //   light: "#F5EBFF",
-    //   // dark: will be calculated from palette.secondary.main,
-    //   contrastText: "#47008F",
-    // },
   },
   components: {
     MuiButton: {
@@ -69,6 +68,16 @@ export const theme = createTheme({
           lineHeight: 1.5,
           fontSize: "1rem",
         },
+        sizeMedium: {
+          padding: "16px 40px",
+          lineHeight: "1.5",
+          fontSize: "1rem",
+          fontWeight: "500",
+        },
+        outlinedSecondary: ({ theme }) => ({
+          color: theme.palette.text.primary,
+          borderColor: theme.palette.secondary.contrastText,
+        }),
       },
     },
     MuiToolbar: {
@@ -87,6 +96,19 @@ export const theme = createTheme({
             paddingLeft: theme.spacing(8),
             paddingRight: theme.spacing(8),
           },
+        }),
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          padding: "14px 18px",
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.secondary.dark,
+          fontSize: "1rem",
+          fontWeight: 500,
+          height: "48px",
+          borderRadius: "100px",
         }),
       },
     },
