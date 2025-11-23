@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Travel Trucks
 
-## Getting Started
+**Travel Trucks** is a web application designed for travelers who want
+to explore and rent travel trucks or campers. The platform simplifies
+searching, viewing, and booking vehicles for trips and adventures.
 
-First, run the development server:
+## 🚀 Key Features
+
+- Browse available travel trucks and campers
+- Filter by location, dates, and vehicle type
+- Check vehicle availability
+- View detailed information about each vehicle (photos, description,
+  specifications)
+- Book a vehicle for selected dates
+- User-friendly and interactive interface
+
+## 🛠️ Technologies Used
+
+- **Next.js** --- SSR and SPA structure
+- **TypeScript** / JavaScript
+- **React** --- UI components
+- Additional styling libraries depending on project setup (e.g.,
+  Tailwind CSS, CSS modules)
+
+## 📦 Installation
+
+1.  Clone the repository:
+
+    ```bash
+    git clone https://github.com/fainaku/travel_trucks.git
+    ```
+
+2.  Navigate into the project folder:
+
+    ```bash
+    cd travel_trucks
+    ```
+
+3.  Install dependencies:
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+## ▶️ Usage
+
+Start the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open in your browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Project Structure
 
-## Learn More
+    travel_trucks/
+    ├── app/
+    │   └── ... (pages / route handlers)
+    ├── components/
+    │   └── ... (reusable UI components)
+    ├── lib/
+    │   └── ... (utilities, API handlers)
+    ├── public/
+    │   └── ... (static assets)
+    ├── package.json
+    ├── tsconfig.json
+    └── ...
 
-To learn more about Next.js, take a look at the following resources:
+## ⚙️ Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If the app requires environment variables (e.g., API keys), create a
+`.env.local` file and add them there. Check the project for
+`.env.example` if available.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🖼️ Favicon
 
-## Deploy on Vercel
+The favicon for this project was taken from **freeicons.io**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Icon by [Read](https://freeicons.io/profile/1) on [freeicons.io](https://freeicons.io)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1.  Fork the repository
+2.  Create a new branch (`git checkout -b feature-xyz`)
+3.  Make your changes
+4.  Submit a pull request
+
+Please follow the project's code style and include tests when
+appropriate.
+
+## 📄 License
+
+Add your license information here (e.g., MIT, Apache 2.0).
+
+## 👩 Author
+
+**Faina Kusiaka** --- creator and maintainer of the project.
+
+## 📞 Contact
+
+If you have questions or suggestions, feel free to reach out via GitHub
+or email.
