@@ -1,37 +1,63 @@
-import { Camper } from "@/lib/api/api";
+"use client";
+
 import CamperItem from "../CamperItem/CamperItem";
 import List from "@mui/material/List";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import { useCampersStore } from "@/lib/stores/campersStore";
 
-type Props = {
-  campers: Camper[];
-};
+const CamperList = () => {
+  const { campers, total, loadMore, loading, hydrated } = useCampersStore();
+  if (!hydrated) return null;
 
-const CamperList = ({ campers }: Props) => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 6,
-      }}
-    >
-      <List
-        sx={{
-          display: "flex",
-          gap: "32px",
-          flexDirection: "column",
-        }}
-      >
-        {campers.map((camper) => (
-          <CamperItem key={camper.id} item={camper} />
-        ))}
-      </List>
+    <Box>
+      {!loading && campers.length === 0 && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h6"
+            component="span"
+            color="textSecondary"
+            sx={{ mt: 4 }}
+          >
+            No campers found by these filters
+          </Typography>
+        </Box>
+      )}
 
-      <Button variant="outlined" color="secondary">
-        Load more
-      </Button>
+      {campers.length > 0 && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <List
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+            }}
+          >
+            {campers.map((camper) => (
+              <CamperItem key={camper.id} item={camper} />
+            ))}
+          </List>
+
+          {campers.length < total && (
+            <Button variant="outlined" color="secondary" onClick={loadMore}>
+              Load more
+            </Button>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };

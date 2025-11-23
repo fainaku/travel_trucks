@@ -1,42 +1,71 @@
-"use client";
 import { create } from "zustand";
-import { getCampers } from "../api/api";
-import type { Camper } from "@/lib/api/api";
+import { Camper, CamperFilters, getCampers } from "@/lib/api/api";
 
-interface CampersState {
+export interface CampersState {
   campers: Camper[];
+  total: number;
   page: number;
   limit: number;
-  hasMore: boolean;
+  filters: CamperFilters;
   loading: boolean;
-  fetchCampers: (page?: number) => Promise<void>;
-  nextPage: () => Promise<void>;
+  hydrated: boolean;
+
+  loadInitial: () => Promise<void>;
+  loadMore: () => Promise<void>;
+  setFilters: (filters: CamperFilters) => void;
 }
 
 export const useCampersStore = create<CampersState>((set, get) => ({
   campers: [],
+  total: 0,
   page: 1,
   limit: 4,
-  hasMore: false,
+  filters: {},
   loading: false,
+  hydrated: false,
 
-  fetchCampers: async (page = get().page) => {
+  loadInitial: async () => {
+    const { limit, filters } = get();
+    set({ campers: [], page: 1, loading: true });
+
+    try {
+      const data = await getCampers({
+        page: 1,
+        limit,
+        ...filters,
+      });
+
+      set({
+        campers: data.items,
+        total: data.total,
+        page: 1,
+        loading: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  loadMore: async () => {
+    const { page, limit, filters, campers } = get();
+    const nextPage = page + 1;
     set({ loading: true });
 
-    const { limit } = get();
-
-    const { items, total } = await getCampers(page, limit);
+    const data = await getCampers({
+      page: nextPage,
+      limit,
+      ...filters,
+    });
 
     set({
-      campers: items,
-      page,
+      campers: [...campers, ...data.items],
+      page: nextPage,
       loading: false,
-      hasMore: total < limit * page,
     });
   },
 
-  nextPage: async () => {
-    const newPage = get().page + 1;
-    await get().fetchCampers(newPage);
+  setFilters: (newFilters: CamperFilters) => {
+    const { filters } = get();
+    set({ filters: { ...filters, ...newFilters } });
   },
 }));

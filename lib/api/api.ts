@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// const BASE_URL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
 axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
 
 export interface CamperImage {
@@ -21,13 +20,13 @@ export interface Camper {
   rating: number;
   location: string;
   description: string;
-  form: string;
+  form: "fullyIntegrated" | "alcove" | "panelTruck";
   length: string;
   width: string;
   height: string;
   tank: string;
   consumption: string;
-  transmission: string;
+  transmission: "manual" | "automatic";
   engine: string;
   AC: boolean;
   bathroom: boolean;
@@ -42,15 +41,41 @@ export interface Camper {
   reviews: CamperReview[];
 }
 
+export type CamperFilters = Partial<
+  Pick<
+    Camper,
+    "location" | "form" | "TV" | "AC" | "bathroom" | "kitchen" | "transmission"
+  >
+>;
+
 export type CamperListResponse = {
   items: Camper[];
   total: number;
 };
 
-export const getCampers = async (page = 1, limit = 4) => {
-  const response = await axios.get<CamperListResponse>("/campers", {
-    params: { page, limit },
-  });
+export const getCampers = async (
+  params: {
+    page?: number;
+    limit?: number;
+  } & CamperFilters = {
+    page: 1,
+    limit: 4,
+  }
+): Promise<CamperListResponse> => {
+  try {
+    const { data } = await axios.get<CamperListResponse>("/campers", {
+      params,
+    });
+    return data;
+  } catch {
+    return {
+      items: [],
+      total: 0,
+    };
+  }
+};
 
+export const getSingleCamper = async (id: string) => {
+  const response = await axios.get<Camper>(`/campers/${id}`);
   return response.data;
 };

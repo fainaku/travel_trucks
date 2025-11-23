@@ -1,5 +1,6 @@
 "use client";
 
+import type {} from "@mui/x-date-pickers-pro/themeAugmentation";
 import { Inter } from "next/font/google";
 import { createTheme } from "@mui/material";
 
@@ -15,6 +16,10 @@ export const theme = createTheme({
     h2: {
       fontSize: "1.5rem",
       fontWeight: 600,
+    },
+    h3: {
+      fontWeight: 600,
+      fontSize: "1.25rem",
     },
     body2: {
       fontSize: "1rem",
@@ -37,9 +42,6 @@ export const theme = createTheme({
     primary: {
       main: "#E44848",
       dark: "#D84343",
-      // light: will be calculated from palette.primary.main,
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
       main: "#F7F7F7",
@@ -110,6 +112,74 @@ export const theme = createTheme({
           height: "48px",
           borderRadius: "100px",
         }),
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        list: {
+          gap: "40px",
+        },
+        indicator: {
+          height: "5px",
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          padding: "0 0 24px 0",
+          textTransform: "capitalize",
+          color: theme.palette.text.primary,
+          ...theme.typography.h3,
+          "&.Mui-selected": {
+            color: theme.palette.text.primary,
+          },
+        }),
+        selected: ({ theme }) => ({
+          color: theme.palette.text.primary,
+        }),
+      },
+    },
+    MuiInput: {
+      defaultProps: {
+        disableUnderline: true,
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        variant: "filled",
+        slotProps: {
+          input: {
+            disableUnderline: true,
+          },
+        },
+      },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& .MuiInputBase-root": {
+            backgroundColor: theme.palette.secondary.main,
+            borderRadius: 12,
+          },
+        }),
+      },
+    },
+    MuiDatePicker: {
+      defaultProps: {
+        slotProps: {
+          textField: {
+            variant: "filled",
+            fullWidth: true,
+            slotProps: {
+              input: {
+                disableUnderline: true,
+                sx: {
+                  backgroundColor: "#F7F7F7", // або theme.palette.secondary.main
+                  borderRadius: "12px",
+                },
+              },
+            },
+          },
+        },
       },
     },
   },

@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
-import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
+import Providers from "@/components/Providers/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
-            <TanStackProvider>
+            <Providers>
               <Box
                 sx={{
                   display: "flex",
@@ -37,7 +38,7 @@ export default function RootLayout({
                 <Header />
                 {children}
               </Box>
-            </TanStackProvider>
+            </Providers>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

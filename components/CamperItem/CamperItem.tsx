@@ -4,8 +4,11 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Box, Button, Chip, Link } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import RouterLink from "next/link";
+import CamperEquipment from "../CamperEquipment/CamperEquipment";
+import { useFavoritesStore } from "@/lib/stores/favoritesStore";
+import { useEffect } from "react";
 
 type Props = {
   item: Camper;
@@ -14,6 +17,13 @@ type Props = {
 const formatPrice = (value: number) => `€${value.toFixed(2)}`;
 
 export default function CamperItem({ item }: Props) {
+  const { toggleFavorite, isFavorite, hydrate } = useFavoritesStore();
+
+  useEffect(() => {
+    hydrate();
+  }, []);
+
+  const favorite = isFavorite(item.id);
   return (
     <Card variant="outlined" sx={{ maxWidth: 888 }}>
       <Box
@@ -73,8 +83,19 @@ export default function CamperItem({ item }: Props) {
                   <Typography variant="h2" component="span">
                     {formatPrice(item.price)}
                   </Typography>
-                  <svg width="26" height="24">
-                    <use href="/icons/symbol-defs.svg#icon-Property-1Default" />
+                  <svg
+                    width="26"
+                    height="24"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => toggleFavorite(item)}
+                  >
+                    <use
+                      href={
+                        favorite
+                          ? "/icons/symbol-defs.svg#icon-Property-1pressed"
+                          : "/icons/symbol-defs.svg#icon-Property-1Default"
+                      }
+                    />
                   </svg>
                 </Box>
               </Box>
@@ -117,58 +138,14 @@ export default function CamperItem({ item }: Props) {
               {item.description}
             </Typography>
 
-            <Box
-              sx={{
-                display: "flex",
-                gap: 1,
-                flexWrap: "wrap",
-                textTransform: "capitalize",
-              }}
-            >
-              <Chip
-                label={item.transmission}
-                icon={
-                  <svg width="20" height="20">
-                    <use href="/icons/symbol-defs.svg#icon-diagram" />
-                  </svg>
-                }
-              />
-              <Chip
-                label={item.engine}
-                icon={
-                  <svg width="20" height="20">
-                    <use href="/icons/symbol-defs.svg#icon-Petrol" />
-                  </svg>
-                }
-              />
-              {item.kitchen && (
-                <Chip
-                  label="Kitchen"
-                  icon={
-                    <svg width="20" height="20">
-                      <use href="/icons/symbol-defs.svg#icon-cup-hot" />
-                    </svg>
-                  }
-                />
-              )}
-              {item.AC && (
-                <Chip
-                  label="AC"
-                  icon={
-                    <svg width="20" height="20">
-                      <use href="/icons/symbol-defs.svg#icon-wind" />
-                    </svg>
-                  }
-                />
-              )}
-            </Box>
+            <CamperEquipment item={item} limit={4} />
           </Box>
           <Box>
             <Button
               variant="contained"
               size="medium"
               component={RouterLink}
-              href="/catalog"
+              href={`/catalog/${item.id}`}
             >
               Show more
             </Button>

@@ -29,7 +29,7 @@ const Header = () => {
           <Container sx={{ display: "flex" }}>
             <RouterLink href="/">
               <svg id="icon-Logo" width="136" height="16">
-                <use href="/icons/symbol-defs.svg#icon-Logo"></use>
+                <use href="/icons/Logo.svg#icon-Logo"></use>
               </svg>
             </RouterLink>
             <Box sx={{ flexGrow: 1 }} />
