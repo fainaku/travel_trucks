@@ -95,13 +95,15 @@ const CamperDetailsComponent = ({ item, openTab }: Props) => {
                 src={img.thumb}
                 alt={item.name}
                 fill
+                sizes="(max-width: 600px) 100vw, 25vw"
+                loading="eager"
                 style={{
                   objectFit: "cover",
                   width: "100%",
                   height: "100%",
                   borderRadius: "10px",
                 }}
-              ></Image>
+              />
             </ImageListItem>
           ))}
         </ImageList>

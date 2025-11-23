@@ -15,11 +15,11 @@ import dayjs from "dayjs";
 
 const BookingSchema = Yup.object().shape({
   name: Yup.string()
-    .required("Required")
+    .required("Enter name")
     .min(3, "Name must be at least 3 characters")
     .max(50, "Name is too long"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  date: Yup.date().required("Required"),
+  email: Yup.string().email("Invalid email").required("Enter email"),
+  date: Yup.date().required("Select a date"),
   comment: Yup.string().max(500, "Comment is too long"),
 });
 
@@ -80,6 +80,7 @@ export default function CamperForm() {
                 value={values.date}
                 onChange={(value) => setFieldValue("date", value)}
                 minDate={dayjs()}
+                showDaysOutsideCurrentMonth
                 slotProps={{
                   textField: {
                     error: touched.date && Boolean(errors.date),

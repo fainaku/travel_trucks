@@ -21,6 +21,7 @@ export default function CamperItem({ item }: Props) {
 
   useEffect(() => {
     hydrate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const favorite = isFavorite(item.id);

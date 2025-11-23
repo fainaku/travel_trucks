@@ -1,6 +1,6 @@
 "use client";
 
-import type {} from "@mui/x-date-pickers-pro/themeAugmentation";
+import type {} from "@mui/x-date-pickers/themeAugmentation";
 import { Inter } from "next/font/google";
 import { createTheme } from "@mui/material";
 
@@ -147,6 +147,7 @@ export const theme = createTheme({
     },
     MuiTextField: {
       defaultProps: {
+        autoComplete: "off",
         variant: "filled",
         slotProps: {
           input: {
@@ -163,8 +164,20 @@ export const theme = createTheme({
         }),
       },
     },
+    MuiPopper: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& .MuiPaper-root": {
+            boxShadow: "none",
+            border: `1px solid ${theme.palette.text.secondary}`,
+            borderRadius: "12px",
+          },
+        }),
+      },
+    },
     MuiDatePicker: {
       defaultProps: {
+        dayOfWeekFormatter: (weekday) => weekday.format("ddd").toUpperCase(),
         slotProps: {
           textField: {
             variant: "filled",
@@ -180,6 +193,47 @@ export const theme = createTheme({
             },
           },
         },
+      },
+    },
+    MuiDayCalendar: {
+      styleOverrides: {
+        header: ({ theme }) => ({
+          borderBottom: `1px solid ${theme.palette.text.secondary}`,
+        }),
+        weekDayLabel: {
+          fontSize: "0.875rem",
+          fontWeight: 600,
+        },
+        monthContainer: {
+          padding: "18px 0",
+        },
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderRadius: "32px",
+          minWidth: "36px",
+          height: "32px",
+          fontSize: "0.875rem",
+          "&:focus": {
+            backgroundColor: "transparent",
+          },
+          "&:hover": {
+            backgroundColor: theme.palette.secondary.main,
+          },
+          "&.Mui-selected": {
+            backgroundColor: theme.palette.text.secondary,
+            color: theme.palette.secondary.light,
+            "&:hover": {
+              backgroundColor: theme.palette.text.secondary,
+            },
+          },
+          "&.Mui-selected:focus": {
+            backgroundColor: theme.palette.text.secondary,
+            color: theme.palette.secondary.light,
+          },
+        }),
       },
     },
   },

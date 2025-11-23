@@ -2,15 +2,20 @@
 
 import CamperItem from "../CamperItem/CamperItem";
 import List from "@mui/material/List";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useCampersStore } from "@/lib/stores/campersStore";
 
 const CamperList = () => {
   const { campers, total, loadMore, loading, hydrated } = useCampersStore();
+
   if (!hydrated) return null;
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: "100%",
+      }}
+    >
       {!loading && campers.length === 0 && (
         <Box
           sx={{
@@ -56,6 +61,20 @@ const CamperList = () => {
               Load more
             </Button>
           )}
+        </Box>
+      )}
+
+      {loading && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
+          <CircularProgress size="100px" enableTrackSlot />
         </Box>
       )}
     </Box>
