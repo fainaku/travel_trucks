@@ -9,7 +9,7 @@ export default function Home() {
     <Box
       sx={{
         height: "100%",
-        backgroundImage: 'url("/Campers.webp")',
+        backgroundImage: 'url("/Camper.webp")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         py: 8,

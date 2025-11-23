@@ -11,6 +11,7 @@ import {
   Alert,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const BookingSchema = Yup.object().shape({
   name: Yup.string()
@@ -78,6 +79,7 @@ export default function CamperForm() {
                 label="Booking date *"
                 value={values.date}
                 onChange={(value) => setFieldValue("date", value)}
+                minDate={dayjs()}
                 slotProps={{
                   textField: {
                     error: touched.date && Boolean(errors.date),

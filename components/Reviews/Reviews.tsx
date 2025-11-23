@@ -5,6 +5,18 @@ interface Props {
   item: Camper;
 }
 
+const CustomStar = ({ filled }: { filled?: boolean }) => (
+  <svg width="16" height="16">
+    <use
+      href={
+        filled
+          ? "/icons/symbol-defs.svg#icon-Property-1PressedStar"
+          : "/icons/symbol-defs.svg#icon-Property-1DefaultStar"
+      }
+    />
+  </svg>
+);
+
 const Reviews = ({ item }: Props) => {
   if (!item.reviews || item.reviews.length === 0) {
     return <Typography>No reviews yet</Typography>;
@@ -36,7 +48,13 @@ const Reviews = ({ item }: Props) => {
               </Avatar>
               <Box display="flex" flexDirection="column" gap={0.5}>
                 {el.reviewer_name}
-                <Rating value={el.reviewer_rating} precision={0.5} readOnly />
+                <Rating
+                  value={el.reviewer_rating}
+                  precision={0.5}
+                  readOnly
+                  icon={<CustomStar filled />}
+                  emptyIcon={<CustomStar />}
+                />
               </Box>
             </Box>
           </Typography>
