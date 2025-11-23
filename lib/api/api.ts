@@ -76,6 +76,10 @@ export const getCampers = async (
 };
 
 export const getSingleCamper = async (id: string) => {
-  const response = await axios.get<Camper>(`/campers/${id}`);
-  return response.data;
+  try {
+    const response = await axios.get<Camper>(`/campers/${id}`);
+    return response.data;
+  } catch {
+    return null;
+  }
 };

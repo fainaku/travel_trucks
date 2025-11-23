@@ -10,21 +10,25 @@ import {
   Typography,
 } from "@mui/material";
 import RouterLink from "next/link";
-
 import Image from "next/image";
 import { useState } from "react";
 import Features from "../Features/Features";
 import CamperForm from "../CamperForm/CamperForm";
 import Reviews from "../Reviews/Reviews";
 
-interface Props {
-  item: Camper;
-}
-
 const formatPrice = (value: number) => `€${value.toFixed(2)}`;
 
-const CamperDetailsComponent = ({ item }: Props) => {
-  const [tab, setTab] = useState(0);
+export type TabValue = "features" | "reviews";
+
+interface Props {
+  item: Camper;
+  openTab?: TabValue;
+}
+
+const CamperDetailsComponent = ({ item, openTab }: Props) => {
+  const [tab, setTab] = useState<TabValue>(
+    openTab === "features" || openTab === "reviews" ? openTab : "features"
+  );
 
   return (
     <Box sx={{ py: "48px" }}>
@@ -42,10 +46,12 @@ const CamperDetailsComponent = ({ item }: Props) => {
         }}
       >
         <Link
-          href="/"
-          component={RouterLink}
+          component="button"
           color="textPrimary"
           underline="hover"
+          onClick={() => {
+            setTab("reviews");
+          }}
         >
           <Box
             sx={{
@@ -105,19 +111,22 @@ const CamperDetailsComponent = ({ item }: Props) => {
       </Typography>
 
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={tab} onChange={(e, newValue: number) => setTab(newValue)}>
-          <Tab label="Features" />
-          <Tab label="Reviews" />
+        <Tabs
+          value={tab}
+          onChange={(e, newValue: TabValue) => setTab(newValue)}
+        >
+          <Tab label="Features" value="features" />
+          <Tab label="Reviews" value="reviews" />
         </Tabs>
       </Box>
-      <CustomTabPanel value={tab} index={0}>
+      <CustomTabPanel value={tab} tabId="features">
         <Box display="flex" gap="40px">
           <Features item={item} />
           <CamperForm />
         </Box>
       </CustomTabPanel>
 
-      <CustomTabPanel value={tab} index={1}>
+      <CustomTabPanel value={tab} tabId="reviews">
         <Box display="flex" gap="40px">
           <Reviews item={item} />
           <CamperForm />
@@ -132,22 +141,22 @@ export default CamperDetailsComponent;
 function CustomTabPanel({
   children,
   value,
-  index,
+  tabId,
   ...other
 }: {
   children?: React.ReactNode;
-  index: number;
-  value: number;
+  tabId: TabValue;
+  value: TabValue;
 }) {
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
+      hidden={value !== tabId}
+      id={`tabpanel-${tabId}`}
+      aria-labelledby={`tab-${tabId}`}
       {...other}
     >
-      {value === index && <Box sx={{ pt: 5 }}>{children}</Box>}
+      {value === tabId && <Box sx={{ pt: 5 }}>{children}</Box>}
     </div>
   );
 }

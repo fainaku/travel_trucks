@@ -101,7 +101,7 @@ export default function CamperItem({ item }: Props) {
               </Box>
               <Box sx={{ display: "flex", gap: "16px" }}>
                 <Link
-                  href="/"
+                  href={`/catalog/${item.id}?tab=reviews`}
                   component={RouterLink}
                   color="textPrimary"
                   underline="hover"
