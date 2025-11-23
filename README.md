@@ -16,11 +16,11 @@ searching, viewing, and booking vehicles for trips and adventures.
 
 ## 🛠️ Technologies Used
 
-- **Next.js** --- SSR and SPA structure
+- **Next.js** — SSR and SPA structure
 - **TypeScript** / JavaScript
-- **React** --- UI components
-- Additional styling libraries depending on project setup (e.g.,
-  Tailwind CSS, CSS modules)
+- **React** — UI components
+- **MUI (Material UI)** — main styling library (components, theming, responsive design)
+- Additional styling libraries depending on project setup (e.g., Tailwind CSS, CSS modules)
 
 ## 📦 Installation
 

@@ -173,7 +173,7 @@ export const theme = createTheme({
               input: {
                 disableUnderline: true,
                 sx: {
-                  backgroundColor: "#F7F7F7", // або theme.palette.secondary.main
+                  backgroundColor: "#F7F7F7",
                   borderRadius: "12px",
                 },
               },
