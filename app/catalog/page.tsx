@@ -13,6 +13,8 @@ export const Catalog = async () => {
         state={{
           campers: response.items,
           total: response.total,
+          page: 1,
+          filters: {},
         }}
       />
 

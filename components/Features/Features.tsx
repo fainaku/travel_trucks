@@ -32,7 +32,7 @@ const Features = ({ item }: Props) => {
         sx={{
           paddingTop: "24px",
           display: "flex",
-
+          gap: 2,
           flexDirection: "column",
         }}
       >
@@ -42,8 +42,8 @@ const Features = ({ item }: Props) => {
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "8px",
               fontWeight: 500,
+              textTransform: "capitalize",
             }}
           >
             <Typography>{label}</Typography>

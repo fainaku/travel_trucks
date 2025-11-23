@@ -111,6 +111,7 @@ export const theme = createTheme({
           fontWeight: 500,
           height: "48px",
           borderRadius: "100px",
+          mixBlendMode: "multiply",
         }),
       },
     },
@@ -192,6 +193,35 @@ export const theme = createTheme({
               },
             },
           },
+        },
+      },
+    },
+    MuiPickersArrowSwitcher: {
+      styleOverrides: {
+        root: {
+          width: "100%",
+          padding: "0 12px",
+        },
+        spacer: {
+          width: "auto",
+          flexGrow: 1,
+        },
+      },
+    },
+    MuiPickersCalendarHeader: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          paddingLeft: 0,
+          paddingRight: 0,
+        },
+        labelContainer: {
+          position: "absolute",
+          width: "100%",
+          justifyContent: "center",
+        },
+        switchViewButton: {
+          display: "none",
         },
       },
     },

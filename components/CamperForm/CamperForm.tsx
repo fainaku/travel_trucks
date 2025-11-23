@@ -60,6 +60,7 @@ export default function CamperForm() {
               <TextField
                 name="name"
                 label="Name *"
+                value={values.name}
                 onChange={handleChange}
                 error={touched.name && Boolean(errors.name)}
                 helperText={touched.name && errors.name}
@@ -69,6 +70,7 @@ export default function CamperForm() {
               <TextField
                 name="email"
                 label="Email *"
+                value={values.email}
                 onChange={handleChange}
                 error={touched.email && Boolean(errors.email)}
                 helperText={touched.email && errors.email}
@@ -80,6 +82,7 @@ export default function CamperForm() {
                 value={values.date}
                 onChange={(value) => setFieldValue("date", value)}
                 minDate={dayjs()}
+                disablePast
                 showDaysOutsideCurrentMonth
                 slotProps={{
                   textField: {
@@ -94,6 +97,7 @@ export default function CamperForm() {
                 label="Comment"
                 multiline
                 minRows={3}
+                value={values.comment}
                 onChange={handleChange}
                 fullWidth
               />
@@ -104,8 +108,7 @@ export default function CamperForm() {
                   type="submit"
                   size="medium"
                   sx={{
-                    width: "100%",
-                    maxWidth: "166px",
+                    minWidth: "166px",
                   }}
                 >
                   Send
